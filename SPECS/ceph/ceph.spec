@@ -1,7 +1,7 @@
 Summary:        User space components of the Ceph file system
 Name:           ceph
 Version:        15.2.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        LGPLv2 and LGPLv3 and CC-BY-SA and GPLv2 and Boost and BSD and MIT
 URL:            https://ceph.io/
 Vendor:         Microsoft
@@ -41,8 +41,6 @@ Source0:        https://download.ceph.com/tarballs/%{name}-%{version}.tar.gz
 %bcond_with tcmalloc
 %bcond_with mgr_diskprediction
 
-%define debug_package %{nil}
-
 %if %{with selinux}
 %{!?_selinux_policy_version: %global _selinux_policy_version 0.0.0}
 %endif
@@ -53,10 +51,6 @@ Source0:        https://download.ceph.com/tarballs/%{name}-%{version}.tar.gz
 %{!?python3_version: %global python3_version 3}
 %{!?python3_sitelib: %global python3_sitelib %(python3 -c "from distutils.sysconfig import get_python_lib;print(get_python_lib())")}
 %define python3_sitearch %(python3 -c "from distutils.sysconfig import get_python_lib; import sys; sys.stdout.write(get_python_lib(1))")
-
-
-# disable dwz which compresses the debuginfo
-%global _find_debuginfo_dwz_opts %{nil}
 
 
 #################################################################################
@@ -1784,8 +1778,11 @@ exit 0
 %config %{_sysconfdir}/prometheus/ceph/ceph_default_alerts.yml
 
 %changelog
+* Mon May 17 2021 Thomas Crain <thcrain@microsoft.com> - 15.2.4-3
+- Add back in the debuginfo package
+
 * Fri Feb 05 2021 Joe Schmitt <joschmit@microsoft.com> - 15.2.4-2
 - Include python bytecompiled files in the resulting package.
 
-*   Fri Aug 21 2020 Thomas Crain <thcrain@microsoft.com> 15.2.4-1
--   Initial CBL-Mariner import from Ceph source (license: LGPLv2.1)
+* Fri Aug 21 2020 Thomas Crain <thcrain@microsoft.com> - 15.2.4-1
+- Initial CBL-Mariner import from Ceph source (license: LGPLv2.1)
