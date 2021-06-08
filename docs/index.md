@@ -9,7 +9,7 @@ ranging from Azure services to powering IoT infrastructure. Mariner is the
 recommended Linux distribution for use with Microsoft products.
 
 If you have any questions about Mariner that are not answered in this
-documentaiton, we strongly encourage you to get in touch with us at
+documentation, we strongly encourage you to get in touch with us at
 [marinerqa@microsoft.com](mailto:marinerqa@microsoft.com)
 
 ## Who's using Mariner today?
@@ -22,15 +22,15 @@ well.
 These include:
 
 * [Azure Kubernetes Services](https://kubernetes.io/) - Production grade
-  container orchestration with Mariner provided along side as an option for
+  container orchestration with Mariner provided alongside as an option for
   container hosting.
 * [AKS HCI](https://docs.microsoft.com/en-us/azure-stack/aks-hci/) - Azure
   Kubernetes Service on Azure Stack HCI - quick way to get started hosting
-  Windows and Linux containers in your datacenter.
+  Windows and Linux containers in your data center.
 
 ![Mariner Composition](images/MarinerComposition.png)
 
-Mariner adopts a customer centric approach and we collaborate with our
+Mariner adopts a customer-centric approach and we collaborate with our
 customers to remove roadblocks, collect feedback and provide necessary packages
 and support. To get consult a professional contact
 [marinerqa@microsoft.com](mailto:marinerqa@microsoft.com)
@@ -48,7 +48,7 @@ lifecycle management.
 * **Support & Updates**:
 	- 72 hours SLA for critical vulnerabilities. 
 	- Live patching for Mariner kernel CEVs
-	- Patches automatically available for customer to update when most
+	- Patches automatically available for the customer to update when most
 	  convenient for them. 
 	- `dnf` infrastructure used for upgrading packages.
 * **Virtualization**
@@ -76,11 +76,11 @@ The main CBL-Mariner repository provides detailed instructions on building
 CBL-Mariner from end-to-end.
 
 While it is possible to clone CBL-Mariner and build packages or images from
-that environment, _it is not the recommended approach_ for most users. Usually
+that environment, _it is not the recommended approach_ for most users. Usually,
 it is better to use prebuilt versions of Mariner that are available through the
 Azure store.
 
-It is typically best to work in a smaller, problem focused environment where
+It is typically best to work in a smaller, problem-focused environment where
 you can quickly build just what you need, and rely on the fact that the curated
 CBL-Mariner packages are already available in the cloud.
 
@@ -118,14 +118,13 @@ subsequent sections. If you are just evaluating the system then the `docker`
 variant is the fastest way to run and try Mariner. For production you can also
 pick one of the other options below:
 
-* Local docker container. This option will work on linux or on windows with
+* Local docker container. This option will work on Linux or Windows with
   Windows Subsystem For Linux
   ([WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10)).
 * Azure virtual machine deployment - accomplished using Asure-CLI commands
   described in detail in the Azure deployment section.
 * Standard VHD Image – The core VHD image can be deployed to sovereign and
-  airgapped clouds through Azure Marketplace. Core VHD images will be published
-  monthly. _Coming soon_ 
+  airgapped clouds through Azure Marketplace. Core VHD images will be published monthly. _Coming soon_ 
 * Containers – Container images can be deployed to sovereign and airgapped
   clouds through MCR.
 * AKS Container Host – Similar to the Ubuntu-AKS container host, AKS will own
@@ -163,7 +162,7 @@ First, install az-cli:
 Mariner is available to you through the Azure Marketplace. You can start a
 Mariner VM using az-cli commands as follows.
 
-First you need to authenticate the command line interface with the azure services. To do so execute the following command and follow instructions:
+First, you need to authenticate the command line interface with the azure services. To do so execute the following command and follow instructions:
 
 	az login
 
@@ -179,12 +178,12 @@ Once the VM has been created, it will be visible in your azure account:
 ![vm-mariner](images/azure-mariner-vm.jpg)
 
 You can now use `ssh` to log in to your machine and continue configuration as
-you would normally configure a linux virtual machine.
+you would normally configure a Linux virtual machine.
 
 ## Using Mariner With AKS
 
 Mariner can be also used as an AKS container host. This is accomplished through
-a combination of az-cli and kubernetes services.
+a combination of az-cli and Kubernetes services.
 
 First, install kubectl through az-cli:
 
@@ -352,14 +351,14 @@ You may need to restart the pods in the kube-system namespace:
 # System Administration
 
 In most cases you would not need to do any on-system administration tasks and
-you should use higher level tools instead. However if you do have a situation
+you should use higher level tools instead. However, if you do have a situation
 where you need to manually install packages or otherwise do low level
 maintenance work then you can do so by logging into the system over SSH or
 through the serial console.
 
 ## Enabling Serial Console 
 
-Serial console is useful if you want to view boot logs or have a console to
+The serial console is useful if you want to view boot logs or have a console to
 the headless VM - or for GDB debugging on the VM. You can enable the serial
 console by creating a named pipe to the Hyper-V VM.
 
@@ -384,7 +383,7 @@ To see all unit files and their current status run:
 
 	systemctl list-unit-files
 
-You can always use a combination of commands to show only certain kind of services. For example you can combine one of the above commands with grep:
+You can always use a combination of commands to show only certain kinds of services. For example, you can combine one of the above commands with grep:
 
 	systemctl list-unit-files | grep network
 
@@ -436,7 +435,7 @@ You can start and stop apache web server using the `apachectl` command (not syst
 	apachectl start
 	apachectl stop
 
-To check that the web server is actually running do:
+To check that the webserver is running do:
 
 	sudo netstat -anl | grep :80
 
@@ -462,7 +461,7 @@ default.
 ## Package Management Overview
 
 When installing a package on your system, TDNF connects to one or more RPM
-repositories in the cloud. IF a package is unavailable in one repository, a
+repositories in the cloud. If a package is unavailable in one repository, a
 subsequent repository is checked. 
 
 Repositories, and the order in which those repositories are scanned, are
@@ -470,7 +469,7 @@ specified in configuration files that reside in your Mariner image.
 
 The TDNF configuration file /etc/tdnf/tdnf.conf contains configuration
 information about how TDNF should handle caching and other local functions. It
-also contains a pointer to the repo configuration directory. Owing to it's YUM
+also contains a pointer to the repo configuration directory. Owing to its YUM
 heritage, the default is to point to /etc/yum.repos.d/ which contains the list
 of repo configuration files.
 
@@ -487,13 +486,13 @@ functionality here.
 
 This repository holds all RPM's that are built from the Mariner Repository.
 There are currently over 1700 packages available. Please note that this list of
-packages is actually a "super-set" of the packages installed on the Minimal
-Mariner Image. Mariner team manages more packages than the ones installed in
+packages is a "super-set" of the packages installed on the Minimal
+Mariner Image. The Mariner team manages more packages than the ones installed in
 the default image.
 
 ## Regular Upgrades
 
-To upgrade all your installed packages to latest Mariner releases run:
+To upgrade all your installed packages to the latest Mariner releases run:
 
 	sudo dnf upgrade
 
