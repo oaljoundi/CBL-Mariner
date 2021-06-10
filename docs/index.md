@@ -2,7 +2,7 @@
 
 This is the official Mariner Linux build system. You can use this repository to
 build a bootable Mariner Linux image and use it either as a standalone VM image
-or as an AKS container host where you can host your Kubernetes containers.
+or as an AKS container host where you can host your Kubernetes containers. [Mariner containers should be called out as an explicit use case]
 
 Mariner Linux is a Linux container host optimized for Azure/AKS cloud compute
 platforms offered by Microsoft. Mariner is a lightweight operating system
@@ -10,7 +10,7 @@ extendable using custom packages and tools.
 
 Mariner is being developed by Azure Edge & Platform to power various use cases
 ranging from Azure services to powering IoT infrastructure. Mariner is the
-recommended Linux distribution for use with Microsoft products.
+recommended Linux distribution for use with Microsoft products. [I'm not sure if we want to say this just yet, but up to Jim]
 
 If you have any questions about Mariner that are not answered in this
 documentation, we strongly encourage you to get in touch with us at
@@ -21,12 +21,12 @@ documentation, we strongly encourage you to get in touch with us at
 Mariner is available to you through the Azure marketplace if you have a
 subscription. Mariner is also used internally by Microsoft and several
 derivative versions are in use by several teams in and around Microsoft as
-well.  
+well.  [should also call our the Mariner containers are available on MCR (Microsoft container registry)]
 
 These include:
 
 * [Azure Kubernetes Services](https://kubernetes.io/) - Production grade
-  container orchestration with Mariner provided alongside as an option for
+  container orchestration with Mariner as an option for
   container hosting.
 * [AKS HCI](https://docs.microsoft.com/en-us/azure-stack/aks-hci/) - Azure
   Kubernetes Service on Azure Stack HCI - quick way to get started hosting
@@ -36,13 +36,13 @@ These include:
 
 Mariner adopts a customer-centric approach and we collaborate with our
 customers to remove roadblocks, collect feedback and provide necessary packages
-and support. To get consult a professional contact
+and support. To consult a professional contact
 [marinerqa@microsoft.com](mailto:marinerqa@microsoft.com)
 
 ## Key Capabilities Of Mariner Linux
 
-Mariner provides many of the traditional benefits of using Linux and in
-addition to that Mariner also provides hardened security and efficient
+Mariner provides many of the traditional benefits of using Linux. In
+addition to that, Mariner also provides hardened security and efficient
 lifecycle management.
 
 * **Mariner core**
@@ -50,8 +50,7 @@ lifecycle management.
 	  bare-metal x64 or ARM64) and allows the customer to build on top of it as
 	  needed.  
 * **Support & Updates**:
-	- 72 hours SLA for critical vulnerabilities. 
-	- Live patching for Mariner kernel CEVs
+	- 72 hour SLA for critical vulnerabilities. 
 	- Patches automatically available for the customer to update when most
 	  convenient for them. 
 	- `dnf` infrastructure used for upgrading packages.
@@ -76,13 +75,15 @@ lifecycle management.
 
 # Getting Started With Mariner
 
+[this section was a bit hard to read. More defined paragraphs or bullet points would be better]
+
 The main CBL-Mariner repository provides detailed instructions on building
 CBL-Mariner from end-to-end.
 
 While it is possible to clone CBL-Mariner and build packages or images from
 that environment, _it is not the recommended approach_ for most users. Usually,
 it is better to use prebuilt versions of Mariner that are available through the
-Azure store.
+Azure store. [might want to be more clear on why it's usually better]
 
 It is typically best to work in a smaller, problem-focused environment where
 you can quickly build just what you need, and rely on the fact that the curated
@@ -118,7 +119,7 @@ your derivative to an /etc/os-subrelease file.
 
 You can provision Mariner in production as well as in a test environment using
 a variety of options. Several deployment options are described in this and
-subsequent sections. If you are just evaluating the system then the `docker`
+subsequent sections. If you are just evaluating the system, then the `docker`
 variant is the fastest way to run and try Mariner. For production you can also
 pick one of the other options below:
 
@@ -127,15 +128,13 @@ pick one of the other options below:
   ([WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10)).
 * Azure virtual machine deployment - accomplished using Asure-CLI commands
   described in detail in the Azure deployment section.
-* Standard VHD Image – The core VHD image can be deployed to sovereign and
-  airgapped clouds through Azure Marketplace. Core VHD images will be published monthly. _Coming soon_ 
-* Containers – Container images can be deployed to sovereign and airgapped
-  clouds through MCR.
+* Standard VHD Image – The core VHD image can be deployed hrough Azure Marketplace. 
+* Containers – Container images can be deployed through MCR.
 * AKS Container Host – Similar to the Ubuntu-AKS container host, AKS will own
   the deployment and support of the Mariner-AKS container host in the various
   clouds.
-* Packages – At a monthly cadence, Mariner packages in packages.microsoft.com
-  are mirrored in the airgapped environment through RepoDepot. 
+* Packages – Mariner packages are published in packages.microsoft.com
+
 
 ## Getting Started on WSL2 with Docker
 
@@ -145,13 +144,12 @@ follows:
 
 	sudo docker run -it cblmariner.azurecr.io/base/core:1.0 /bin/bash
 
-This will download and run basic Mariner image inside the docker container and
+This will download and run a basic Mariner image inside the docker container and
 you can evaluate the basic rootfs and test your applications within this image.
 
 ## Getting Started on Azure 
 
-You can also use Mariner on Azure services - such as running it as the core
-image on an Azure virtual machine.
+Mariner is available to you through the Azure Marketplace. 
 
 You can install Mariner on Azure using the az-cli utility which is available as
 "azure-cli" package on Ubuntu (this also works if you are running Ubuntu under
@@ -163,8 +161,7 @@ First, install az-cli:
 	pip3 install –-upgrade pip
 	pip3 install az.cli
 
-Mariner is available to you through the Azure Marketplace. You can start a
-Mariner VM using az-cli commands as follows.
+You can start a Mariner VM using az-cli commands as follows. [The above section discusses Az-CLI as well, so this might be confusing]
 
 First, you need to authenticate the command line interface with the azure services. To do so execute the following command and follow instructions:
 
@@ -507,14 +504,14 @@ To upgrade all your installed packages to the latest Mariner releases run:
 
 ## Available Packages
 
-Packages that are currently available can be found here and here.
+Packages that are currently available can be found here and here. [no link??]
 
 Packages that are planning to be built can be found here under the "packages"
-tab. Please make sure all filters are reset before viewing.
+tab. Please make sure all filters are reset before viewing. [this is a copy paste from my eng.ms documentation and needs to be updated]
 
 Similar packages on different distributions may have different names. If you
 are looking for a particular package but can't seem to find it in this list,
-please post your question in the Mariner OS support teams channel.
+please post your question in the Mariner OS support teams channel. [external customers wouldn't have access to this]
 
 ## Package Requests
 
