@@ -4,6 +4,10 @@ This is the official Mariner Linux build system. You can use this repository to
 build a bootable Mariner Linux image and use it either as a standalone VM image
 or as an AKS container host where you can host your Kubernetes containers.
 
+Mariner Linux is a Linux container host optimized for Azure/AKS cloud compute
+platforms offered by Microsoft. Mariner is a lightweight operating system
+extendable using custom packages and tools.
+
 Mariner is being developed by Azure Edge & Platform to power various use cases
 ranging from Azure services to powering IoT infrastructure. Mariner is the
 recommended Linux distribution for use with Microsoft products.
@@ -343,6 +347,8 @@ Once you have the latest aks-preview extension installed you can create a CBLMar
 	az aks create --name testcblmarinercluster --resource-group cblmarinertestrg --os-sku CBLMariner --ssh-key-value <path to id_rsa.pub>
 	az aks get-credentials --resource-group cblmarinertestrg --name testcblmarinercluster
 	kubectl get pods --all-namespaces
+
+![kubernetes pods](images/kubernetes-output.jpg)
 
 You may need to restart the pods in the kube-system namespace:
 
